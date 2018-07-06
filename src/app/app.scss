@@ -14,3 +14,70 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+ion-app{
+    
+    .scroll-content{
+        overflow-y: hidden;
+    }
+
+    button {
+        &.button-md, &.button-ios {
+            box-shadow: none;
+            text-transform: none;
+        }
+
+        &.signal-btn-white {
+            color: color($colors, primary);
+        }
+    }
+
+    ion-item{
+        &.clear-item {
+            background-color: transparent;
+            box-shadow: none;
+
+            &.item-ios.item-block .item-inner, &.item-md.item-block .item-inner {
+                border-bottom: 0px;
+            }
+        }
+       
+        &.error-border {
+            &.item-block {
+                .item-inner {
+                    border-bottom: 1px solid color($colors, danger);
+                }
+            }
+
+            &.item-input {
+                .label-md, .label-ios {
+                    color: color($colors, danger);
+                }
+            }
+        }
+    }
+
+    .btn-icon-corner .button-inner {
+        justify-content: space-between;
+    }
+
+    p {
+        &.error-text {
+            margin-bottom: 0;
+        }
+    }
+
+    .invisible { 
+        visibility: hidden; 
+    }
+
+    .bold {
+        font-weight: bold !important;
+    }
+
+    .divider {
+        border-bottom: 2px solid $mid-gray;
+        padding: 0;
+        width: 100%;
+    }
+
+}

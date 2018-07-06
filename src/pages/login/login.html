@@ -1,0 +1,66 @@
+<ion-content padding-top text-center>
+
+  <img margin-bottom src="assets/imgs/logo-icon-white-md.png" alt="Logo" />
+
+  <div padding>
+    <form [formGroup]="authForm" (ngSubmit)="submitForm(authForm.value)">
+      <ion-list margin-bottom>
+        <ion-row>
+          <ion-col col-12 text-right>
+            <ion-item [ngClass]="{'error-border':!authForm.controls.email.valid && authForm.controls.email.touched}">
+              <ion-label floating>Email</ion-label>
+              <ion-input type="text" formControlName="email"></ion-input>
+            </ion-item>
+            <p ion-text color="danger" class="error-text" *ngIf="authForm.controls.email.hasError('required') && authForm.controls.email.touched">This field is required!</p>
+            <p ion-text color="danger" class="error-text" *ngIf="authForm.controls.email.hasError('pattern') && authForm.controls.email.touched">Email is not valid!</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-12 text-right>
+            <ion-item [ngClass]="{'error-border':!authForm.controls.password.valid && authForm.controls.password.touched}">
+                <ion-label floating>Password</ion-label>
+              <ion-input type="password" formControlName="password"></ion-input>
+            </ion-item>
+            <p ion-text color="danger" class="error-text" *ngIf="authForm.controls.password.hasError('required') && authForm.controls.password.touched">This field is required!</p>
+            <p ion-text color="danger" class="error-text" *ngIf="authForm.controls.password.hasError('pattern') && authForm.controls.password.touched">Must have at least 1 character and 1 number!</p>
+            <p ion-text color="danger" class="error-text" *ngIf="authForm.controls.password.hasError('minlength') && authForm.controls.password.touched">Must have minimum 8 characters!</p>
+            <p ion-text color="danger" class="error-text" *ngIf="authForm.controls.password.hasError('maxlength') && authForm.controls.password.touched">Maximum characters can be 100!</p>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+
+      <ion-row margin-bottom>
+        <ion-col col-12 text-right>
+          <a ion-text color="primary" (click)="gotoForgotPassword()">Forgot Password?</a>
+        </ion-col>
+      </ion-row>
+
+      <button margin-bottom ion-button block color="primary" type="submit">
+        Sign In
+      </button>
+
+    </form>
+
+    <ion-row>
+      <ion-col col-12 text-center margin-bottom>
+        <a ion-text color="primary" (click)="gotoSignup()">Don't have an account? Register here</a>
+      </ion-col>
+
+      <ion-col col-12 text-center>
+        <span ion-text color="primary" class="bold">OR</span>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div margin-bottom class="divider"></div>
+
+  <div padding-left padding-right>
+    <button ion-button block margin-bottom color="white" type="button" class="btn-icon-corner google-button">
+      <img src="assets/imgs/google-icon.png" alt="Google Logo" />
+      Sign in with Google
+      <img class="invisible" src="assets/imgs/google-icon.png" alt="Google Logo" />
+    </button>
+  </div>
+
+</ion-content>

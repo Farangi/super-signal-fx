@@ -1,0 +1,27 @@
+page-landing {
+
+    ion-content {
+        &.content-md, &.content-ios {
+            background-color: color($colors, primary);
+        }
+
+        .scroll-content{
+            overflow-y: hidden;
+        }
+
+        ion-grid {
+            height: 100%;
+
+            ion-row {
+                height: 100%
+            }
+        }
+
+        .buttons {
+            position: absolute;
+            bottom: 30px;
+            width: calc(100% - (#{$content-padding} *2));
+        }
+    }
+
+}
