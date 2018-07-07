@@ -24,20 +24,25 @@ export class SignupPage {
       username: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],       
       email: ['', Validators.compose([Validators.required, Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)])],
       password: ['', Validators.compose([Validators.required, Validators.pattern(/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/), Validators.minLength(8), Validators.maxLength(100)])],
-      termsAndServices: ['', Validators.compose([Validators.required])]
+      termsAndServices: [false]
     });
   }
 
-  submitForm(value: any) {
+  submitForm(value: any) {console.log(value);
     if(this.authForm.valid) {
-      let credentials = {
-        email: value.email,
-        password: value.password
-      };
-      this.auth.signUp(credentials).then(
-        () => this.navCtrl.setRoot("SidemenuPage"),
-        error => this.alertService.error(error)
-      );
+      if(value.termsAndServices){
+        let credentials = {
+          email: value.email,
+          password: value.password
+        };
+        this.auth.signUp(credentials).then(
+          () => this.navCtrl.setRoot("SidemenuPage"),
+          error => this.alertService.error(error)
+        );
+      }
+      else {
+        this.alertService.error('You need to accept Terms and Services before you can continue!')
+      }
     }
   }
 
