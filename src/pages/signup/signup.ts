@@ -1,3 +1,4 @@
+import { AuthService } from './../../_services/auth.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -16,7 +17,8 @@ export class SignupPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public formBuilder: FormBuilder,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private auth:AuthService
   ) {
     this.authForm = formBuilder.group({ 
       username: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],       
@@ -28,7 +30,14 @@ export class SignupPage {
 
   submitForm(value: any) {
     if(this.authForm.valid) {
-      console.log(value);
+      let credentials = {
+        email: value.email,
+        password: value.password
+      };
+      this.auth.signUp(credentials).then(
+        () => this.navCtrl.setRoot("SidemenuPage"),
+        error => this.alertService.error(error)
+      );
     }
   }
 

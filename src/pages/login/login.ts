@@ -1,6 +1,8 @@
+import { AlertService } from './../../_services/alert.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../_services/auth.service';
 
 @IonicPage()
 @Component({
@@ -13,7 +15,9 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private auth: AuthService,
+    private alertService: AlertService
     ) {
       this.authForm = formBuilder.group({        
         email: ['', Validators.compose([Validators.required, Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)])],
@@ -21,11 +25,28 @@ export class LoginPage {
     });
   }
 
-  submitForm(value: any) {console.log(value);
+  submitForm(value: any) {
     if(this.authForm.valid) {
-      console.log(value);
+      let credentials = {
+        email: value.email,
+        password: value.password
+      };
+      this.auth.signInWithEmail(credentials)
+        .then(
+          () => this.navCtrl.setRoot("SidemenuPage"),
+          error => this.alertService.error(error)
+        )
+        .catch();
     }
-    this.navCtrl.setRoot("SidemenuPage");
+  }
+
+  loginWithGoogle() {
+    this.auth.signInWithGoogle()
+      .then(
+        () => this.navCtrl.setRoot("SidemenuPage"),
+        error => this.alertService.error(error)
+      )
+      .catch();
   }
 
   gotoSignup() {
