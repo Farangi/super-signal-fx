@@ -1,25 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the HomePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  signals: any = [];
+  id: any = 0;
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams
+    ) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
+  ngOnInit(){
+    this.getSignals();
+  }
+
+  trackSignals(index, signal) {
+    return signal ? signal.id : undefined;
+  }
+
+  getSignals(){
+    this.signals.push({id:this.id++, asset:'EURUSD', direction:'Buy limit', status:'pending'});
+    this.signals.push({id:this.id++, asset:'USDJPY', direction:'Sell by market', status:'active'});
+  }
+
+  refreshSignals(refresher){
+    setTimeout(() => {
+      this.getSignals();
+      refresher.complete();
+    }, 4000);
   }
 
 }

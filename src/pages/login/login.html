@@ -1,6 +1,6 @@
 <ion-content padding-top text-center>
 
-  <img margin-bottom src="assets/imgs/logo-icon-white-md.png" alt="Logo" />
+  <img margin-bottom src="assets/imgs/logo-icon-color-md.png" alt="Logo" />
 
   <div padding>
     <form [formGroup]="authForm" (ngSubmit)="submitForm(authForm.value)">
@@ -44,7 +44,7 @@
 
     <ion-row>
       <ion-col col-12 text-center margin-bottom>
-        <a ion-text color="primary" (click)="gotoSignup()">Don't have an account? Register here</a>
+        <a ion-text color="primary" (click)="gotoSignup()">Don’t have an account yet? Register here!</a>
       </ion-col>
 
       <ion-col col-12 text-center>
@@ -60,6 +60,12 @@
       <img src="assets/imgs/google-icon.png" alt="Google Logo" />
       Sign in with Google
       <img class="invisible" src="assets/imgs/google-icon.png" alt="Google Logo" />
+    </button>
+
+    <button ion-button block margin-bottom type="button" (click)="loginWithFacebook()" class="btn-icon-corner facebook-button">
+      <img src="assets/imgs/facebook-icon.png" alt="Facebook Logo" />
+      Sign in with Facebook
+      <img class="invisible" src="assets/imgs/facebook-icon.png" alt="Facebook Logo" />
     </button>
   </div>
 

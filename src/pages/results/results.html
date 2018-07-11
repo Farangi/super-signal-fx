@@ -1,0 +1,106 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+        <button ion-button color="light" menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title color="light" ion-text>Results</ion-title>
+  </ion-navbar>
+  
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="type">
+      <ion-segment-button value="all">
+        All
+      </ion-segment-button>
+      <ion-segment-button value="filter">
+        Filter
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher (ionRefresh)="refreshResults($event)">
+    <ion-refresher-content pullingIcon="none">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div [ngSwitch]="type">
+    <div *ngSwitchCase="'all'">
+      <ion-row *ngFor="let result of results;trackBy trackResult" class="result-item" align-items-center>
+        <ion-col col-8 text-left>
+          <p>{{result.asset}}</p>
+          <p class="sub time"><ion-icon name="time"></ion-icon>{{result.date | date: 'yyyy-MM-dd'}} | {{result.direction}}</p>
+        </ion-col>
+        <ion-col col-4 text-right>
+          <p>{{result.pips}}</p>
+          <p class="sub" [class.active]="result.status === 'active'" 
+                         [class.pending]="result.status === 'pending'"
+                         [class.cancelled]="result.status === 'cancelled'"
+                         [class.closed]="result.status === 'closed'">
+              {{result.status | uppercase}}
+          </p>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngSwitchCase="'filter'">
+      <div class="controls">
+        <ion-item color="dark">
+          <ion-label>Select Pair</ion-label>
+          <select-searchable item-content title="Pairs" [(ngModel)]="pairFilter" 
+            itemValueField="value" itemTextField="name" [items]="pairs" [isOkButtonEnabled]="true" [canSearch]="true" 
+            [focusSearchbar]="true" [noItemsFoundText]="'No matching pairs. kindly try another.'">
+          </select-searchable>
+        </ion-item>
+
+        <div *ngIf="showDateFilter">
+          <ion-item color="dark" class="date-item">
+            <ion-label>From</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" max="{{currentDate}}" [(ngModel)]="dateFilter.from"></ion-datetime>
+          </ion-item>
+  
+          <ion-item color="dark" class="date-item">
+            <ion-label>To</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" min="{{dateFilter.from}}" max="{{currentDate}}" [(ngModel)]="dateFilter.to"></ion-datetime>
+          </ion-item>
+        </div>
+
+        <button ion-button clear full color="light" class="add-filter-btn" *ngIf="!showDateFilter" (click)="addDateFilter()">
+          <ion-icon name="add"></ion-icon>
+          Add Date filter
+        </button>
+      </div>
+
+      <ion-row class="header">
+        <ion-col col-12>
+          <span ion-text color="light">Results</span>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngFor="let result of results | pairfilter:pairFilter | daterange :dateFilter.from :dateFilter.to;trackBy trackResult" class="result-item" align-items-center>
+        <span *ngIf="results.length == 0">No Signals avaiable for this pair try another.</span>
+        <ion-col col-8 text-left>
+          <p>{{result.asset}}</p>
+          <p class="sub time"><ion-icon name="time"></ion-icon>{{result.date | date: 'yyyy-MM-dd'}} | {{result.direction}}</p>
+        </ion-col>
+
+        <ion-col col-4 text-right>
+          <p>{{result.pips}}</p>
+          <p class="sub" [class.active]="result.status === 'active'" 
+                          [class.pending]="result.status === 'pending'"
+                          [class.cancelled]="result.status === 'cancelled'"
+                          [class.closed]="result.status === 'closed'">
+              {{result.status | uppercase}}
+          </p>
+        </ion-col>
+      </ion-row> 
+    </div>
+
+  </div>
+
+</ion-content>

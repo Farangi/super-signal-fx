@@ -1,0 +1,23 @@
+page-account {
+
+    ion-header {
+        ion-navbar {
+            .toolbar-background-md, .toolbar-background-ios {
+                background: $c-header;
+            }
+
+            ion-title {
+                .toolbar-title-md, .toolbar-title-ios {
+                    color: color($colors, light);
+                }
+            }
+        }
+    }
+
+    ion-content {
+        &.content-md, &.content-ios {
+            background-color: color($colors, dark);
+        }
+    }
+
+}

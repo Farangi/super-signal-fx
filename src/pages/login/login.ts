@@ -49,6 +49,15 @@ export class LoginPage {
       .catch();
   }
 
+  loginWithFacebook() {
+    this.auth.signInWithFacebook()
+      .then(
+        () => this.navCtrl.setRoot("SidemenuPage"),
+        error => this.alertService.error(error)
+      )
+      .catch();
+  }
+
   gotoSignup() {
     this.navCtrl.push("SignupPage");
   }

@@ -1,0 +1,150 @@
+page-results {
+
+    ion-header{
+
+        &.header-md::after {
+            background-image: none;
+            width: 0;
+            height: 0;
+            display: none;
+        }
+
+        ion-navbar {
+            .toolbar-background-md, .toolbar-background-ios {
+                background: $c-header;
+            }
+
+            ion-title {
+                .toolbar-title-md, .toolbar-title-ios {
+                    color: color($colors, light);
+                }
+            }
+        }
+
+        ion-toolbar {
+            &.toolbar-md {
+                padding: 0;
+                min-height: 42px;
+            }
+
+            .toolbar-background-md, .toolbar-background-ios {
+                background: color($colors, darksecondary);
+            }
+
+            ion-segment {
+                &.segment-md{
+                     .segment-button {
+                         border-bottom-color: $c-header;
+                     }
+                }
+            }
+        }
+    }
+
+    ion-content {
+        &.content-md, &.content-ios {
+            background-color: color($colors, dark);
+        }
+
+        ion-item{
+            &.item-md, &.item-ios {
+                padding-left: 0;
+
+                &.item-block {
+                    .item-inner {
+                        padding-left: 8px;
+                        padding-right: 0;
+                        border-bottom: 1px solid $c-signal-item-border;
+                    }
+                }
+
+                &.date-item:after {
+                    content: '';
+                    position: absolute;
+                    right: -10px;
+                    bottom: 0;
+                    width: 0;
+                    height: 0;
+                    border-left: 10px solid transparent;
+                    border-right: 10px solid transparent;
+                    border-top: 10px solid color($colors, light);
+                    clear: both;
+                    transform: rotate(-45deg);
+                }
+            }
+        }
+
+        .controls {
+            padding: 8px;
+
+            .add-filter-btn {
+                &.button-md, &.button-ios {
+                    padding: 0 8px;
+                    margin-top: 8px;
+                    margin-bottom: 0;
+
+                    .button-inner {
+                        justify-content: flex-start;
+                    }
+                }
+
+                ion-icon {
+                    margin-right: 8px;
+                }
+            }
+        }
+
+        .header {
+            background-color: color($colors, darksecondary);
+            min-height: $list-header-height;
+            padding-left: 15px;
+            border-bottom: 1px solid $c-signal-item-border;
+            border-top: 1px solid $c-signal-item-border;
+        }
+
+        .result-item {
+            //min-height: 50px;
+            padding: 5px 15px 0 15px;
+            border-bottom: 1px solid $c-signal-item-border;
+
+            ion-col {
+                p{
+                    margin-top: 0;
+                    margin-bottom: 5px;
+                    font-weight: bold;
+                    color:  color($colors, white);
+
+                    &.sub {
+                        font-size: 11px;
+                        font-weight: normal;
+                        color:  color($colors, light);
+
+                        &.time {
+                            ion-icon {
+                                margin-right: 4px;
+                                color: color($colors, secondary);
+                            }
+                        }
+                    }
+
+                    &.active {
+                        color: color($colors, secondary);
+                    }
+
+                    &.pending {
+                        color: color($colors, primary);
+                    }
+
+                    &.closed {
+                        color: color($colors, danger);
+                    }
+
+                    &.cancelled {
+                        color: color($colors, danger);
+                    }
+                }
+            }
+        }
+    }
+
+}

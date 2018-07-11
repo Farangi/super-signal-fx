@@ -16,40 +16,40 @@ export interface PageInterface {
 })
 export class SidemenuPage {
 
-  rootPage = 'HomePage';
- 
+  rootPage = 'TabsPage';
+
   @ViewChild(Nav) nav: Nav;
 
-  pages: PageInterface[] = [];
-
-  /* pages: PageInterface[] = [
-    { title: 'Menu', pageName: 'MenuPage', tabComponent: 'MenuPage', index: 0, icon: 'list-box' },
-    { title: 'Profile', pageName: 'ProfilePage', tabComponent: 'ProfilePage', index: 1, icon: 'person' },
-    { title: 'Smart Card', pageName: 'SmartcardPage', tabComponent: 'SmartcardPage', index: 2, icon: 'card' },
-    { title: 'Order History', pageName: 'OrderhistoryPage', tabComponent: 'OrderhistoryPage', index: 3, icon: 'return-left' }
-  ]; */
+  pages: PageInterface[] = [
+    { title: 'Home', pageName: 'HomePage', tabComponent: 'HomePage', index: 0, icon: 'home' },
+    { title: 'Results', pageName: 'ResultsPage', tabComponent: 'ResultsPage', index: 1, icon: 'filing' },
+    { title: 'Account', pageName: 'AccountPage', tabComponent: 'AccountPage', index: 2, icon: 'person' },
+  ];
 
   constructor(
-      public navCtrl: NavController, 
-      public navParams: NavParams) {
+    public navCtrl: NavController, 
+    public navParams: NavParams
+    ) {
   }
 
   openPage(page: PageInterface) {
     let params = {};
+    let childNav = this.nav.getActiveChildNavs()[0];
 
     if (page.index) {
       params = { tabIndex: page.index };
     }
 
-    if (this.nav.getActiveChildNav() && page.index != undefined) {
-      this.nav.getActiveChildNav().select(page.index);
+    if (childNav && page.index != undefined) {
+      childNav.select(page.index);
+      //this.tabsNav.select(page.index);
     } else {
       this.nav.setRoot(page.pageName, params);
     }
   }
  
   isActive(page: PageInterface) {
-    let childNav = this.nav.getActiveChildNav();
+    let childNav = this.nav.getActiveChildNavs()[0];
  
     if (childNav) {
       if (childNav.getSelected() && childNav.getSelected().root === page.tabComponent) {

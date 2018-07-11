@@ -41,7 +41,7 @@ export class SignupPage {
         );
       }
       else {
-        this.alertService.error('You need to accept Terms and Services before you can continue!')
+        this.alertService.error('You must agree to the terms of service before continuing.')
       }
     }
   }

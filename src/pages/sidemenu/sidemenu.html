@@ -7,7 +7,7 @@
  
   <ion-content>
     <ion-list>
-      <button ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)">
+      <button ion-item color="dark" menuClose *ngFor="let p of pages" (click)="openPage(p)">
         <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
         {{ p.title }}
       </button>
@@ -15,10 +15,12 @@
         <ion-icon item-start name="help-circle"></ion-icon>
         Help
       </button> -->
-      <ion-list-header>
+    </ion-list>
+    <ion-list>
+      <ion-item-divider color="darksecondary">
         Action
-      </ion-list-header>
-      <button ion-item menuClose (click)="logOut()">
+      </ion-item-divider>
+      <button ion-item color="dark" menuClose (click)="logOut()">
         <ion-icon item-start name="log-out"></ion-icon>
         Logout
       </button>

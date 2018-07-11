@@ -1,6 +1,6 @@
 <ion-content padding-top text-center>
 
-    <img margin-bottom src="assets/imgs/logo-icon-white-md.png" alt="Logo" />
+    <img margin-bottom src="assets/imgs/logo-icon-color-md.png" alt="Logo" />
   
     <div padding>
       <form [formGroup]="authForm" (ngSubmit)="submitForm(authForm.value)">
@@ -45,7 +45,7 @@
           <ion-row margin-top>
             <ion-col col-12 text-right>
               <ion-item class="clear-item" [ngClass]="{'error-border':!authForm.controls.termsAndServices.valid && authForm.controls.termsAndServices.touched}">
-                <ion-label>I accept terms and services</ion-label>
+                <ion-label>I accept the terms of service</ion-label>
                 <ion-checkbox color="primary" formControlName="termsAndServices"></ion-checkbox>
               </ion-item>
 
@@ -62,7 +62,7 @@
         </ion-row> -->
   
         <button margin-bottom ion-button block color="primary" type="submit">
-          Signup
+          Sign Up
         </button>
   
       </form>

@@ -1,16 +1,39 @@
 <ion-header>
+
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
+    <ion-buttons start>
+        <button ion-button color="light" menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title color="light" ion-text>Home</ion-title>
   </ion-navbar>
+
+  <div class="sub-header">
+    <span class="sub-header-item">Asset</span>
+    <span class="sub-header-item">Direction</span>
+    <span class="sub-header-item">Status</span>
+  </div>
+
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
-  <p>
-    This is home page.
-  </p>
+  <ion-refresher (ionRefresh)="refreshSignals($event)">
+    <ion-refresher-content pullingIcon="none">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-row *ngFor="let signal of signals;trackBy trackSignals" class="signal-item" align-items-center>
+    <ion-col text-center>
+      {{signal.asset}}
+    </ion-col>
+    <ion-col text-center>
+      {{signal.direction}}
+    </ion-col>
+    <ion-col text-center [class.active]="signal.status === 'active'" [class.pending]="signal.status === 'pending'">
+      {{signal.status | uppercase}}
+    </ion-col>
+  </ion-row>
 
 </ion-content>
