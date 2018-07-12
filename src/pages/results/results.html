@@ -31,6 +31,21 @@
 
   <div [ngSwitch]="type">
     <div *ngSwitchCase="'all'">
+      <ion-row class="header">
+        <ion-col col-12>
+          <span ion-text color="light">Pips</span>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="pips">
+        <ion-col col-6>
+          <p ion-text color="light">All Time Pips</p>
+        </ion-col>
+        <ion-col col-6 text-right>
+          <p ion-text color="white">1300</p>
+        </ion-col>
+      </ion-row>
+
       <ion-row *ngFor="let result of results;trackBy trackResult" class="result-item" align-items-center>
         <ion-col col-8 text-left>
           <p>{{result.asset}}</p>
@@ -51,8 +66,8 @@
     <div *ngSwitchCase="'filter'">
       <div class="controls">
         <ion-item color="dark">
-          <ion-label>Select Pair</ion-label>
-          <select-searchable item-content title="Pairs" [(ngModel)]="pairFilter" 
+          <ion-label>Select Symbol</ion-label>
+          <select-searchable item-content title="Symbol" [(ngModel)]="pairFilter" 
             itemValueField="value" itemTextField="name" [items]="pairs" [isOkButtonEnabled]="true" [canSearch]="true" 
             [focusSearchbar]="true" [noItemsFoundText]="'No matching pairs. kindly try another.'">
           </select-searchable>

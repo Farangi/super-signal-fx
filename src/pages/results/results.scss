@@ -102,6 +102,11 @@ page-results {
             border-top: 1px solid $c-signal-item-border;
         }
 
+        .pips {
+            padding: 0 15px;
+            border-bottom: 1px solid $c-signal-item-border;
+        }
+
         .result-item {
             //min-height: 50px;
             padding: 5px 15px 0 15px;
