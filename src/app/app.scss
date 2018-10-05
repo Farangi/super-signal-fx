@@ -17,7 +17,7 @@
 ion-app{
     
     .scroll-content{
-        overflow-y: hidden;
+        //overflow-y: hidden;
     }
 
     button {
@@ -44,7 +44,7 @@ ion-app{
         &.error-border {
             &.item-block {
                 .item-inner {
-                    border-bottom: 1px solid color($colors, danger);
+                    border-bottom: 1px solid color($colors, danger) !important;
                 }
             }
 

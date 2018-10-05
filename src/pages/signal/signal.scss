@@ -1,4 +1,30 @@
-page-signup {
+page-signal {
+
+    ion-header{
+
+        &.header-md::after {
+            background-image: none;
+            width: 0;
+            height: 0;
+            display: none;
+        }
+
+        ion-navbar {
+            .toolbar-background-md, .toolbar-background-ios {
+                background: $c-header;
+            }
+
+            .bar-button-default-md, .bar-button-default-ios {
+                color: color($colors, light);
+            }
+
+            ion-title {
+                .toolbar-title-md, .toolbar-title-ios {
+                    color: color($colors, light);
+                }
+            }
+        }
+    }
 
     ion-content {
         &.content-md, &.content-ios {
@@ -15,22 +41,23 @@ page-signup {
             &.list-md, &.list-ios {
                 .item-block {
                     .item-inner {
-                        border-bottom: 1px solid color($colors, secondary);
-                        //padding-left: 8px;
+                        border-bottom: 1px solid $c-signal-item-border;
                     }
                 }
 
                 .item-input:last-child {
-                    border-bottom: 1px solid color($colors, secondary);
+                    border-bottom: 1px solid $c-signal-item-border;
                 }
             }
 
             ion-item {
-                &.item {
-                    &.item-md, &.item-ios {
-                        .checkbox-md, .checkbox-ios {
-                            margin-right: 20px;
-                        }
+                &.item-input {
+                    .label-ios {
+                        color: $mid-gray;
+                    }
+
+                    ion-input, ion-textarea {
+                        padding-left: 8px;
                     }
                 }
 
@@ -62,16 +89,32 @@ page-signup {
                     }
                 }
 
-                &.item-input, &.item-checkbox {
-                    .label-ios, .label-md {
-                        color: $mid-gray;
-                    }
-                }
-
                 &.item-md, &.item-ios {
                     padding-left: 0;
-                    color: color($colors, secondary);
+                    font-size: 1.4rem;
+                    color: color($colors, white);
                     background-color: transparent;
+                }
+
+                .copy-button {
+                    background: transparent;
+
+                    ion-icon {
+                        font-size: 2rem;
+                    }
+                }
+            }
+
+            .disclaimer {
+                .discalimer-label {
+                    color: $mid-gray;
+                    margin-bottom: 8px;
+                }
+
+                .discalimer-text {
+                    padding: 10px;
+                    border: 1px solid color($colors, primary);
+                    border-radius: 1px;
                 }
             }
         }

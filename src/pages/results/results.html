@@ -46,13 +46,14 @@
         </ion-col>
       </ion-row>
 
-      <ion-row *ngFor="let result of results;trackBy trackResult" class="result-item" align-items-center>
+      <ion-row *ngFor="let result of results;trackBy trackResult" class="result-item" align-items-center
+      (click)="showSignalDetails(result)">
         <ion-col col-8 text-left>
-          <p>{{result.asset}}</p>
+          <p>{{result.symbol}}</p>
           <p class="sub time"><ion-icon name="time"></ion-icon>{{result.date | date: 'yyyy-MM-dd'}} | {{result.direction}}</p>
         </ion-col>
         <ion-col col-4 text-right>
-          <p>{{result.pips}}</p>
+          <p *ngIf="result.status !== 'active' && result.status !== 'pending'">{{result.pips}}</p>
           <p class="sub" [class.active]="result.status === 'active'" 
                          [class.pending]="result.status === 'pending'"
                          [class.cancelled]="result.status === 'cancelled'"
@@ -67,9 +68,9 @@
       <div class="controls">
         <ion-item color="dark">
           <ion-label>Select Symbol</ion-label>
-          <select-searchable item-content title="Symbol" [(ngModel)]="pairFilter" 
-            itemValueField="value" itemTextField="name" [items]="pairs" [isOkButtonEnabled]="true" [canSearch]="true" 
-            [focusSearchbar]="true" [noItemsFoundText]="'No matching pairs. kindly try another.'">
+          <select-searchable item-content title="Symbol" [(ngModel)]="symbolFilter" 
+            itemValueField="value" itemTextField="name" [items]="symbols" [isOkButtonEnabled]="true" [canSearch]="true" 
+            [focusSearchbar]="true" [noItemsFoundText]="'No symbols found. kindly try again.'">
           </select-searchable>
         </ion-item>
 
@@ -97,15 +98,16 @@
         </ion-col>
       </ion-row>
 
-      <ion-row *ngFor="let result of results | pairfilter:pairFilter | daterange :dateFilter.from :dateFilter.to;trackBy trackResult" class="result-item" align-items-center>
+      <ion-row *ngFor="let result of results | pairfilter:symbolFilter | daterange :dateFilter.from :dateFilter.to;trackBy trackResult" 
+      class="result-item" align-items-center (click)="showSignalDetails(result)">
         <span *ngIf="results.length == 0">No Signals avaiable for this pair try another.</span>
         <ion-col col-8 text-left>
-          <p>{{result.asset}}</p>
+          <p>{{result.symbol}}</p>
           <p class="sub time"><ion-icon name="time"></ion-icon>{{result.date | date: 'yyyy-MM-dd'}} | {{result.direction}}</p>
         </ion-col>
 
         <ion-col col-4 text-right>
-          <p>{{result.pips}}</p>
+          <p *ngIf="result.status !== 'active' && result.status !== 'pending'">{{result.pips}}</p>
           <p class="sub" [class.active]="result.status === 'active'" 
                           [class.pending]="result.status === 'pending'"
                           [class.cancelled]="result.status === 'cancelled'"

@@ -145,7 +145,7 @@ page-results {
                     }
 
                     &.cancelled {
-                        color: color($colors, danger);
+                        color: red;
                     }
                 }
             }

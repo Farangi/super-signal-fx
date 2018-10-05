@@ -1,0 +1,99 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title color="light" ion-text>Signal</ion-title>
+  </ion-navbar>
+  
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+    <!-- <ion-item>
+      <ion-label stacked>Id</ion-label>
+      <ion-input type="text" name="id" [(ngModel)]="signal.id" [readonly]="true"></ion-input>
+    </ion-item> -->
+
+    <ion-item>
+      <ion-label stacked>Symbol</ion-label>
+      <ion-input type="text" name="symbol" [(ngModel)]="signal.symbol" [readonly]="true"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Date</ion-label>
+      <ion-input type="text" name="date" [ngModel]="signal.date | date: 'yyyy-MM-dd'" 
+      (ngModelChange)="signal.date=$event" [readonly]="true"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Status</ion-label>
+      <ion-input type="text" name="status" [ngModel]="signal.status | uppercase" 
+      (ngModelChange)="signal.date=$event" [readonly]="true"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="signal.status === 'closed' || signal.status === 'cancelled'">
+      <ion-label stacked>Result (pips)</ion-label>
+      <ion-input type="text" name="pips" [(ngModel)]="signal.pips" [readonly]="true"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="signal.situation != '' || signal.situation != undefined">
+      <ion-label stacked>Situation</ion-label>
+      <ion-input type="text" name="situation" [(ngModel)]="signal.situation" [readonly]="true"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="signal.profitSecurity != '' || signal.profitSecurity != undefined">
+      <ion-label stacked>Profit Security</ion-label>
+      <ion-textarea name="profitSecurity" [(ngModel)]="signal.profitSecurity" [readonly]="true"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Direction</ion-label>
+      <ion-input type="text" name="direction" [(ngModel)]="signal.direction" [readonly]="true"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Entry</ion-label>
+      <ion-input type="text" name="entry" [(ngModel)]="signal.entry" [readonly]="true"></ion-input>
+      <button ion-button clear item-right color="secondary" class="copy-button" (click)="coptTextToClipboard(signal.entry)"><ion-icon name="clipboard"></ion-icon></button>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Take Profit</ion-label>
+      <ion-input type="text" name="takeProfit" [(ngModel)]="signal.takeProfit" [readonly]="true"></ion-input>
+      <button ion-button clear item-right color="secondary" class="copy-button" (click)="coptTextToClipboard(signal.takeProfit)"><ion-icon name="clipboard"></ion-icon></button>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Stop Loss</ion-label>
+      <ion-input type="text" name="stopLoss" [(ngModel)]="signal.stopLoss" [readonly]="true"></ion-input>
+      <button ion-button clear item-right color="secondary" class="copy-button" (click)="coptTextToClipboard(signal.stopLoss)"><ion-icon name="clipboard"></ion-icon></button>
+    </ion-item>
+
+    <ion-item *ngIf="signal.rule1 != '' || signal.rule1 != undefined">
+      <ion-label stacked>Rule 1</ion-label>
+      <ion-textarea name="rule1" [(ngModel)]="signal.rule1" [readonly]="true"></ion-textarea>
+    </ion-item>
+
+    <ion-item *ngIf="signal.rule2 != '' || signal.rule2 != undefined">
+      <ion-label stacked>Rule 2</ion-label>
+      <ion-textarea name="rule2" [(ngModel)]="signal.rule2" [readonly]="true"></ion-textarea>
+    </ion-item>
+
+    <ion-item *ngIf="signal.rule3 != '' || signal.rule3 != undefined">
+      <ion-label stacked>Rule 3</ion-label>
+      <ion-textarea name="rule3" [(ngModel)]="signal.rule3" [readonly]="true"></ion-textarea>
+    </ion-item>
+
+    <ion-row class="disclaimer">
+      <ion-col col-12 class="discalimer-label">
+        <ion-label stacked>Disclaimer</ion-label>
+      </ion-col>
+
+      <ion-col col-12 class="discalimer-text">
+        <span ion-text color="white">{{disclaimer.text}}</span>
+      </ion-col>
+    </ion-row>
+
+  </ion-list>
+
+</ion-content>

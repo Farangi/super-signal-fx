@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { App, IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+
+import { SignalService } from './../../_services';
 
 @IonicPage()
 @Component({
@@ -8,12 +10,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class HomePage implements OnInit {
 
+  private loader: any;
   signals: any = [];
-  id: any = 0;
 
   constructor(
+    private app: App,
     public navCtrl: NavController, 
-    public navParams: NavParams
+    public navParams: NavParams,
+    private loadingCtrl: LoadingController,
+    private signalService:SignalService
     ) {
   }
 
@@ -21,20 +26,45 @@ export class HomePage implements OnInit {
     this.getSignals();
   }
 
+  presentLoading(msg) {
+    this.loader = this.loadingCtrl.create({
+      content: msg
+    });
+ 
+    this.loader.present();
+  }
+
   trackSignals(index, signal) {
     return signal ? signal.id : undefined;
   }
 
-  getSignals(){
-    this.signals.push({id:this.id++, asset:'EURUSD', direction:'Buy limit', status:'pending'});
-    this.signals.push({id:this.id++, asset:'USDJPY', direction:'Sell by market', status:'active'});
+  getSignals( refresher = null ){
+    if(refresher === null){
+      this.presentLoading('Loading...');
+    }
+
+    this.signalService.getActiveAndPendingSignals().subscribe(signals => {
+      //console.log(signals);
+      if(refresher){
+        refresher.complete();
+      }
+      else {
+        this.loader.dismiss();
+      }
+      this.signals = signals;
+    });
   }
 
   refreshSignals(refresher){
-    setTimeout(() => {
-      this.getSignals();
-      refresher.complete();
-    }, 4000);
+      this.getSignals(refresher);
+  }
+
+  showSignalDetails(signal){
+    this.app.getRootNav().push("SignalPage", signal);
+  }
+
+  addSignal(){
+    this.signalService.addData();
   }
 
 }

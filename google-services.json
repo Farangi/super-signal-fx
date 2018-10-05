@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "416029226686",
+    "firebase_url": "https://super-signal-fx-app.firebaseio.com",
+    "project_id": "super-signal-fx-app",
+    "storage_bucket": "super-signal-fx-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:416029226686:android:03f843f6f71c3946",
+        "android_client_info": {
+          "package_name": "com.supersignal.supersignalfx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "416029226686-3mbgm4o91ljv4u9r2eipk870lmn7qp3c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.supersignal.supersignalfx",
+            "certificate_hash": "71037678dab7c5c580cf064d6ee45688f2ae2fcd"
+          }
+        },
+        {
+          "client_id": "416029226686-scidjegj3kbgrrb8a8pn931bjbqenc91.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBH73F9Dn8RPBrWbAaEMqH7OAlDGIsWSUg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "416029226686-scidjegj3kbgrrb8a8pn931bjbqenc91.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "416029226686-geicl07vbqcuoaspade3mi0feofgo3hm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.supersignal.supersignalfx"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

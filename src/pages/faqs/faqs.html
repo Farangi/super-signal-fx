@@ -1,0 +1,17 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title color="light" ion-text>Faqs</ion-title>
+  </ion-navbar>
+  
+</ion-header>
+
+
+<ion-content padding>
+  <ion-row *ngFor="let faq of faqs">
+    <ion-col>
+      <p ion-text color="light">{{faq.q}}</p>
+      <p ion-text color="white">{{faq.a}}</p>
+    </ion-col>
+  </ion-row>
+</ion-content>

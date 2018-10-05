@@ -7,6 +7,6 @@ export class PairFilterPipe implements PipeTransform {
       return items;
     }
 
-    return items.filter(item => item.asset === filter.name);
+    return items.filter(item => item.symbol === filter.value);
   }
 }

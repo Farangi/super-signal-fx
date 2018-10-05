@@ -1,0 +1,69 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title color="light" ion-text>Contact Us</ion-title>
+  </ion-navbar>
+  
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="contactForm" (ngSubmit)="submitForm(contactForm.value)">
+
+    <ion-list margin-bottom>
+
+        <ion-row>
+          <ion-col text-right>
+            <ion-item no-padding [ngClass]="{'error-border':!contactForm.controls.name.valid && contactForm.controls.email.touched}">
+              <ion-label floating>Name</ion-label>
+              <ion-input formControlName="name" name="name"></ion-input>
+            </ion-item>
+            <p ion-text color="danger" class="error-text" *ngIf="contactForm.controls.name.hasError('required') && contactForm.controls.name.touched">This field is required!</p>
+			  	    <p ion-text color="danger" class="error-text" *ngIf="contactForm.controls.name.hasError('minlength') && contactForm.controls.name.touched">Must have minimum 3 characters!</p>
+			  	    <p ion-text color="danger" class="error-text" *ngIf="contactForm.controls.name.hasError('maxlength') && contactForm.controls.name.touched">Maximum characters can be 50!</p>
+          </ion-col>
+        </ion-row>
+
+      <ion-row>
+        <ion-col text-right>
+          <ion-item no-padding [ngClass]="{'error-border':!contactForm.controls.email.valid && contactForm.controls.email.touched}">
+            <ion-label floating>Email</ion-label>
+            <ion-input formControlName="email" name="email"></ion-input>
+          </ion-item>
+          <p ion-text color="danger" class="error-text" *ngIf="contactForm.controls.email.hasError('required') && contactForm.controls.email.touched">This field is required!</p>
+          <p ion-text color="danger" class="error-text" *ngIf="contactForm.controls.email.hasError('pattern') && contactForm.controls.email.touched">Email is not valid!</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col text-right>
+          <ion-item no-padding [ngClass]="{'error-border':!contactForm.controls.subject.valid && contactForm.controls.subject.touched}">
+            <ion-label floating>Subject</ion-label>
+            <ion-input type="text" formControlName="subject" name="subject"></ion-input>
+          </ion-item>
+          <p ion-text color="danger" class="error-text" *ngIf="contactForm.controls.subject.hasError('required') && contactForm.controls.subject.touched">This field is required!</p>
+          <p ion-text color="danger" class="error-text" *ngIf="contactForm.controls.subject.hasError('maxlength') && contactForm.controls.subject.touched">TMaximum 80 characters allowed!</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col text-right>
+          <ion-item no-padding [ngClass]="{'error-border':!contactForm.controls.message.valid && contactForm.controls.message.touched}">
+            <ion-label floating>Message</ion-label>
+            <ion-textarea rows="8" formControlName="message" name="message"></ion-textarea>
+          </ion-item>
+          <p ion-text color="danger" class="error-text" *ngIf="contactForm.controls.message.hasError('required') && contactForm.controls.message.touched">This field is required!</p>
+          <p ion-text color="danger" class="error-text" *ngIf="contactForm.controls.message.hasError('minlength') && contactForm.controls.message.touched">Must have minimum 5 characters!</p>
+          <p ion-text color="danger" class="error-text" *ngIf="contactForm.controls.message.hasError('maxlength') && contactForm.controls.message.touched">Maximum 500 characters allowed!</p>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+
+    <ion-row>
+      <ion-col text-center>
+          <button ion-button color="secondary" type="submit">Submit</button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>

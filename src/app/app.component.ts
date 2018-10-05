@@ -1,38 +1,33 @@
 
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Platform, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { AlertController } from 'ionic-angular';
+import { AlertController, ToastController } from 'ionic-angular';
 
 import { AlertService } from "../_services";
-
-//import { HomePage } from '../pages/home/home';
+import { FcmService } from '../_services';
+import { AuthService } from '../_services';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
+  @ViewChild('rootNav') navCtrl: NavController;
 
-  rootPage: any = 'LandingPage';
-
-  pages: Array<{title: string, component: any}>;
+  rootPage: any = '';
 
   constructor(
     public platform: Platform, 
     public statusBar: StatusBar, 
     public splashScreen: SplashScreen,
     private alertCtrl: AlertController,
-    private alertService: AlertService) {
-      
-    this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    // this.pages = [
-    //   { title: 'Home', component: 'HomePage' }
-    // ];
-
+    private toastCtrl: ToastController,
+    private authService: AuthService,
+    private fcm: FcmService,
+    private alertService: AlertService
+    ) {
+      this.initializeApp();
   }
 
   initializeApp() {
@@ -44,13 +39,61 @@ export class MyApp {
     });
   }
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+  private initializeNotification(userId){
+    console.log('Notifications');
+    this.platform.ready().then(() => {
+      //this.fcm.subscribeToTopic('all');
+      this.fcm.getToken(userId);
+
+      this.fcm.listenToNotifications().subscribe(data => {
+        if(data.wasTapped){
+          console.log('a tap');
+          console.log(JSON.stringify(data));
+          this.navCtrl.setRoot('SignalPage', JSON.parse(data.signalData));
+        }
+        else {
+          console.log('b tap');
+          console.log(JSON.stringify(data));
+          const toast = this.toastCtrl.create({
+            message: data.title,
+            duration: 3000,
+            showCloseButton: true,
+            closeButtonText: "Show"
+          });
+          toast.onDidDismiss((data, role) => {
+            if (role == "close") {
+              this.navCtrl.push('SignalPage', JSON.parse(data.signalData));
+            }
+          });
+          toast.present();
+        }
+      });
+
+    });
   }
 
   ngOnInit (){
+
+    const userObj = this.authService.currentUserObservable.subscribe(user => {
+      if (!user) {
+        this.rootPage = 'LoginPage';
+        userObj.unsubscribe();
+      } else {
+        this.initializeNotification(user.uid);
+        this.rootPage = 'SidemenuPage';
+        userObj.unsubscribe();
+      }
+    });
+    /* const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+      if (!user) {
+        this.rootPage = 'LoginPage';
+        unsubscribe();
+      } else {
+        this.rootPage = HomePage;
+        unsubscribe();
+      }
+    }); */
+
     this.alertService.getMessage().subscribe( message => {
       if(message){
 

@@ -18,6 +18,19 @@
     </ion-list>
     <ion-list>
       <ion-item-divider color="darksecondary">
+        Help
+      </ion-item-divider>
+      <button ion-item color="dark" menuClose (click)="showFaqs()">
+        <ion-icon item-start name="help"></ion-icon>
+        Faqs
+      </button>
+      <button ion-item color="dark" menuClose (click)="showContactus()">
+        <ion-icon item-start name="call"></ion-icon>
+        Contact Us
+      </button>
+    </ion-list>
+    <ion-list>
+      <ion-item-divider color="darksecondary">
         Action
       </ion-item-divider>
       <button ion-item color="dark" menuClose (click)="logOut()">

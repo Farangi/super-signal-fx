@@ -2,8 +2,8 @@
 
   <ion-navbar>
     <ion-buttons start>
-        <button ion-button color="light" menuToggle>
-          <ion-icon name="menu"></ion-icon>
+      <button ion-button color="light" menuToggle>
+        <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
     <ion-title color="light" ion-text>Home</ion-title>
@@ -15,6 +15,10 @@
     <span class="sub-header-item">Status</span>
   </div>
 
+  <button ion-button color="light" (click)="addSignal()">
+    Create
+  </button>
+
 </ion-header>
 
 <ion-content>
@@ -24,9 +28,9 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-row *ngFor="let signal of signals;trackBy trackSignals" class="signal-item" align-items-center>
+  <ion-row *ngFor="let signal of signals;trackBy trackSignals" class="signal-item" align-items-center (click)="showSignalDetails(signal)">
     <ion-col text-center>
-      {{signal.asset}}
+      {{signal.symbol}}
     </ion-col>
     <ion-col text-center>
       {{signal.direction}}

@@ -1,4 +1,30 @@
-page-signup {
+page-contactus {
+
+    ion-header{
+
+        &.header-md::after {
+            background-image: none;
+            width: 0;
+            height: 0;
+            display: none;
+        }
+
+        ion-navbar {
+            .toolbar-background-md, .toolbar-background-ios {
+                background: $c-header;
+            }
+
+            .bar-button-default-md, .bar-button-default-ios {
+                color: color($colors, light);
+            }
+
+            ion-title {
+                .toolbar-title-md, .toolbar-title-ios {
+                    color: color($colors, light);
+                }
+            }
+        }
+    }
 
     ion-content {
         &.content-md, &.content-ios {
@@ -15,25 +41,16 @@ page-signup {
             &.list-md, &.list-ios {
                 .item-block {
                     .item-inner {
-                        border-bottom: 1px solid color($colors, secondary);
-                        //padding-left: 8px;
+                        border-bottom: 1px solid $c-signal-item-border;
                     }
                 }
 
                 .item-input:last-child {
-                    border-bottom: 1px solid color($colors, secondary);
+                    border-bottom: 0;
                 }
             }
 
             ion-item {
-                &.item {
-                    &.item-md, &.item-ios {
-                        .checkbox-md, .checkbox-ios {
-                            margin-right: 20px;
-                        }
-                    }
-                }
-
                 &.item-md {
                     &.item-input {
                         &.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus){
@@ -43,6 +60,13 @@ page-signup {
                             }
 
                             &:last-child {
+                                box-shadow: none;
+                                border-bottom: 0;
+                            }
+                        }
+
+                        &.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus){
+                            .item-inner {
                                 box-shadow: none;
                                 border-bottom: 0;
                             }
@@ -62,7 +86,7 @@ page-signup {
                     }
                 }
 
-                &.item-input, &.item-checkbox {
+                &.item-input{
                     .label-ios, .label-md {
                         color: $mid-gray;
                     }
@@ -70,14 +94,14 @@ page-signup {
 
                 &.item-md, &.item-ios {
                     padding-left: 0;
-                    color: color($colors, secondary);
+                    color: color($colors, white);
                     background-color: transparent;
                 }
             }
         }
     }
 
-    [col-1],[col-2],[col-3],[col-4],[col-5],[col-6],[col-7],[col-8],[col-9],[col-10],[col-11],[col-12] {
+    .col, [col-1],[col-2],[col-3],[col-4],[col-5],[col-6],[col-7],[col-8],[col-9],[col-10],[col-11],[col-12] {
 		padding:0px;
 	}
 

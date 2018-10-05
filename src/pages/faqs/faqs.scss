@@ -1,0 +1,39 @@
+page-faqs {
+
+    ion-header{
+
+        &.header-md::after {
+            background-image: none;
+            width: 0;
+            height: 0;
+            display: none;
+        }
+
+        ion-navbar {
+            .toolbar-background-md, .toolbar-background-ios {
+                background: $c-header;
+            }
+
+            .bar-button-default-md, .bar-button-default-ios {
+                color: color($colors, light);
+            }
+
+            ion-title {
+                .toolbar-title-md, .toolbar-title-ios {
+                    color: color($colors, light);
+                }
+            }
+        }
+    }
+
+    ion-content {
+        &.content-md, &.content-ios {
+            background-color: color($colors, dark);
+        }
+
+        ion-row {
+            border-bottom: 1px solid $c-signal-item-border;
+        }
+    }
+
+}

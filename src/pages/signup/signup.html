@@ -7,14 +7,14 @@
         <ion-list margin-bottom>
           <ion-row>
             <ion-col col-12 text-right>
-              <ion-item [ngClass]="{'error-border':!authForm.controls.username.valid && authForm.controls.username.touched}">
-                <ion-label floating>Username</ion-label>
-                <ion-input type="text" formControlName="username"></ion-input>
+              <ion-item [ngClass]="{'error-border':!authForm.controls.name.valid && authForm.controls.name.touched}">
+                <ion-label floating>Name</ion-label>
+                <ion-input type="text" formControlName="name"></ion-input>
               </ion-item>
 
-              <p ion-text color="danger" class="error-text" *ngIf="authForm.controls.username.hasError('required') && authForm.controls.username.touched">This field is required!</p>
-			  	    <p ion-text color="danger" class="error-text" *ngIf="authForm.controls.username.hasError('minlength') && authForm.controls.username.touched">Must have minimum 3 characters!</p>
-			  	    <p ion-text color="danger" class="error-text" *ngIf="authForm.controls.username.hasError('maxlength') && authForm.controls.username.touched">Maximum characters can be 50!</p>
+              <p ion-text color="danger" class="error-text" *ngIf="authForm.controls.name.hasError('required') && authForm.controls.name.touched">This field is required!</p>
+			  	    <p ion-text color="danger" class="error-text" *ngIf="authForm.controls.name.hasError('minlength') && authForm.controls.name.touched">Must have minimum 3 characters!</p>
+			  	    <p ion-text color="danger" class="error-text" *ngIf="authForm.controls.name.hasError('maxlength') && authForm.controls.name.touched">Maximum characters can be 50!</p>
             </ion-col>
           </ion-row>
 

@@ -7,36 +7,69 @@ import AuthProvider = firebase.auth.AuthProvider;
 export class AuthService {
 	private user: firebase.User;
 
-	constructor(public afAuth: AngularFireAuth) {
+    constructor(
+        public afAuth: AngularFireAuth
+     ) {
 		afAuth.authState.subscribe(user => {
 			this.user = user;
 		});
 	}
 
 	signInWithEmail(credentials) {
-		console.log('Sign in with email');
 		return this.afAuth.auth.signInWithEmailAndPassword(credentials.email,
 			 credentials.password);
     }
+
+    /* signUp(credentials) {
+        return this.afAuth.auth.createUserAndRetrieveDataWithEmailAndPassword(credentials.email, 
+            credentials.password);
+    } */
     
     signUp(credentials) {
         return new Promise<any>((resolve, reject) => {
             firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(credentials.email, credentials.password)
               .then(res => {
-                resolve(res);
+                let profile = {
+                    displayName: credentials.displayName,
+                    photoURL: ''
+                };
+                this.updateProfile(profile)
+                .then(res => {
+                    resolve(res);
+                })
+                .catch(err => {
+                    resolve(res);
+                });
               })
               .catch(err => {
                 reject(err);
-              });
-          });
+              }
+            );
+        });
     }
 
     get authenticated(): boolean {
         return this.user !== null;
     }
 
+    get currentUser(): any {
+        return this.afAuth.authState
+    }
+
+    get currentUserObservable(): any {
+        return this.afAuth.authState
+    }
+
+    get currentUserId(): string {
+        return this.authenticated ? this.user.uid : '';
+    }
+
     getEmail() {
         return this.user && this.user.email;
+    }
+
+    getDisplayName() {
+        return this.user && this.user.displayName;
     }
 
     signOut(): Promise<void> {
@@ -49,7 +82,7 @@ export class AuthService {
     }
 
     signInWithFacebook() {
-		console.log('Sign in with google');
+		console.log('Sign in with facebook');
 		return this.oauthSignIn(new firebase.auth.FacebookAuthProvider());
     }
 
@@ -73,4 +106,42 @@ export class AuthService {
             });
         }
     }
+
+    public updateProfile(profile){
+        const user = firebase.auth().currentUser;
+        return user.updateProfile({
+            displayName: profile.displayName,
+            photoURL: profile.photoURL
+        });
+    }
+
+    resetPassword(email: string) {
+        var auth = firebase.auth();
+        return auth.sendPasswordResetEmail(email);
+    }
+
+    updateEmail(data){
+         const credentials = firebase.auth.EmailAuthProvider.credential(
+            this.getEmail(), 
+            data.password
+        );
+
+        return new Promise<any>((resolve, reject) => {
+            this.user.reauthenticateAndRetrieveDataWithCredential(credentials)
+            .then(user => {
+                this.user.updateEmail(data.newEmail)
+                .then(user => {
+                    resolve('Success');
+                })
+                .catch(err => {
+                    reject(err);
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+        });
+    }
+
 }

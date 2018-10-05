@@ -13,4 +13,117 @@
 
 <ion-content padding>
 
+  <div class="username">
+    {{userName}}
+  </div>
+
+  <ion-row margin-top>
+    <ion-col text-right>
+        <button ion-button color="primary" type="button" (click)="updatePassword()">Change your password</button>
+    </ion-col>
+  </ion-row>
+
+  <ion-card color="dark" margin-top>
+      <ion-card-header color="color1">
+        Name
+      </ion-card-header>
+      <ion-card-content>
+        <form [formGroup]="nameForm" (ngSubmit)="updateName(nameForm.value)">
+  
+          <ion-list margin-bottom>
+            <ion-row>
+              <ion-col text-right>
+                <ion-item no-padding [ngClass]="{'error-border':!nameForm.controls.name.valid && nameForm.controls.name.touched}">
+                  <ion-label floating>Name</ion-label>
+                  <ion-input formControlName="name" name="name"></ion-input>
+                </ion-item>
+                <p ion-text color="danger" class="error-text" *ngIf="nameForm.controls.name.hasError('required') && nameForm.controls.name.touched">This field is required!</p>
+			  	      <p ion-text color="danger" class="error-text" *ngIf="nameForm.controls.name.hasError('minlength') && nameForm.controls.name.touched">Must have minimum 3 characters!</p>
+			  	      <p ion-text color="danger" class="error-text" *ngIf="nameForm.controls.name.hasError('maxlength') && nameForm.controls.name.touched">Maximum characters can be 50!</p>
+              </ion-col>
+            </ion-row>
+          </ion-list>
+  
+          <ion-row>
+            <ion-col text-center>
+                <button ion-button color="secondary" type="submit">Update</button>
+            </ion-col>
+          </ion-row>
+  
+        </form>
+      </ion-card-content>
+    </ion-card>
+
+  <ion-card color="dark" margin-top>
+    <ion-card-header color="color1">
+      Email
+    </ion-card-header>
+    <ion-card-content>
+      <p>Re-enter your password to update your email.</p>
+      <form [formGroup]="emailForm" (ngSubmit)="updateEmail(emailForm.value)">
+
+        <ion-list margin-bottom>
+          <ion-row>
+            <ion-col text-right>
+              <ion-item no-padding [ngClass]="{'error-border':!emailForm.controls.email.valid && emailForm.controls.email.touched}">
+                <ion-label floating>Email</ion-label>
+                <ion-input formControlName="email" name="email"></ion-input>
+              </ion-item>
+              <p ion-text color="danger" class="error-text" *ngIf="emailForm.controls.email.hasError('required') && emailForm.controls.email.touched">This field is required!</p>
+              <p ion-text color="danger" class="error-text" *ngIf="emailForm.controls.email.hasError('pattern') && emailForm.controls.email.touched">Email is not valid!</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col text-right>
+              <ion-item no-padding [ngClass]="{'error-border':!emailForm.controls.password.valid && emailForm.controls.password.touched}">
+                <ion-label floating>Password</ion-label>
+                <ion-input type="password" formControlName="password" name="password"></ion-input>
+              </ion-item>
+              <p ion-text color="danger" class="error-text" *ngIf="emailForm.controls.password.hasError('required') && emailForm.controls.password.touched">This field is required!</p>
+            </ion-col>
+          </ion-row>
+        </ion-list>
+
+        <ion-row>
+          <ion-col text-center>
+              <button ion-button color="secondary" type="submit">Update</button>
+          </ion-col>
+        </ion-row>
+
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card color="dark" margin-top>
+    <ion-card-header color="color1">
+      Settings
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list margin-bottom>
+        <ion-item>
+          <ion-label style="white-space: pre-wrap;">Receive push notifications</ion-label>
+          <ion-toggle color="secondary" [(ngModel)]="settings.pushNotifications"></ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-label style="white-space: pre-wrap;">Receive email notifications</ion-label>
+          <ion-toggle color="secondary" [(ngModel)]="settings.emailNotifications"></ion-toggle>
+        </ion-item>
+      </ion-list>
+        
+      <ion-row>
+        <ion-col text-center>
+            <button ion-button color="secondary" type="button" (click)="updateSettings()">Update</button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-row margin-top>
+    <ion-col text-center>
+      <button padding ion-button color="primary">My subscription</button>
+    </ion-col>
+  </ion-row>
+
 </ion-content>

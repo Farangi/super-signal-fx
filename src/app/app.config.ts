@@ -1,10 +1,10 @@
 export const firebaseConfig = {
 	fire: {
-		apiKey: "AIzaSyBhogPgjTPlkQiKJvPemEBG1ayt-QdPH8U",
-        authDomain: "super-signal-fx.firebaseapp.com",
-        databaseURL: "https://super-signal-fx.firebaseio.com",
-        projectId: "super-signal-fx",
-        storageBucket: "super-signal-fx.appspot.com",
-        messagingSenderId: "70948634029"
-	}
+		apiKey: "AIzaSyAhSMjHDTUI5DnbsUVLehA2R43_6zDSrkE",
+        authDomain: "super-signal-fx-app.firebaseapp.com",
+        databaseURL: "https://super-signal-fx-app.firebaseio.com",
+        projectId: "super-signal-fx-app",
+        storageBucket: "super-signal-fx-app.appspot.com",
+        messagingSenderId: "416029226686"
+    }
 };

@@ -18,6 +18,111 @@ page-account {
         &.content-md, &.content-ios {
             background-color: color($colors, dark);
         }
+
+        .username {
+            width: 200px;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 0 auto;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 1rem;
+            word-break: break-all;
+            overflow: hidden;
+            color: color($colors, white);
+            border: 1px solid color($colors, primary);
+        }
+
+        ion-card {
+            &.card-ios, &.card-md {
+                margin: 0;
+                width: 100%;
+                border-radius: 0;
+            }
+        }
+
+        ion-list {
+            &.list-ios {
+                &> .item-block:first-child {
+                    border-top: 0;
+                }
+                &> .item-block:last-child {
+                    border-bottom: 0 !important;
+                }
+            }
+
+            &.list-md, &.list-ios {
+                .item-block {
+                    .item-inner {
+                        border-bottom: 1px solid $c-signal-item-border;
+                        //padding-left: 8px;
+                    }
+                }
+
+                .item-input:last-child {
+                    border-bottom: 0;
+                }
+            }
+
+            ion-item {
+                &.item-md {
+                    &.item-input {
+                        &.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus){
+                            .item-inner {
+                                box-shadow: none;
+                                border-bottom: 1px solid $c-signal-item-border;
+                            }
+
+                            &:last-child {
+                                box-shadow: none;
+                                border-bottom: 0;
+                            }
+                        }
+
+                        &.input-has-focus {
+                            .item-inner {
+                                box-shadow: none;
+                                border-bottom: 1px solid color($colors, primary);
+                            }
+
+                            &:last-child {
+                                box-shadow: none;
+                                border-bottom: 0;
+                            }
+                        }
+                    }
+                }
+
+                &.item-md, &.item-ios {
+                    padding-left: 0;
+                    color: color($colors, secondary);
+                    background-color: transparent;
+                }
+            }
+        }
     }
+
+    ion-footer {
+        text-align: center;
+        ion-toolbar {
+            .toolbar-background-md, .toolbar-background-ios {
+                border: 0;
+                background: transparent;
+            }
+        }
+        .button {
+            font-weight: bold;
+            box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    .col, [col-1],[col-2],[col-3],[col-4],[col-5],[col-6],[col-7],[col-8],[col-9],[col-10],[col-11],[col-12] {
+		padding:0px;
+	}
 
 }

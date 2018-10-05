@@ -50,6 +50,10 @@ page-sidemenu {
             &.list-ios {
                 & > .item-block:last-child {
                     border-bottom: 1px solid $c-signal-item-border;
+
+                    .item-inner {
+                        border-bottom: 0;
+                    }
                 }
             }
         }

@@ -1,5 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Nav } from 'ionic-angular';
+import { App, IonicPage, NavController, NavParams, LoadingController, Nav } from 'ionic-angular';
+
+import { AlertService } from "../../_services";
+import { AuthService } from "../../_services";
 
 export interface PageInterface {
   title: string;
@@ -16,6 +19,7 @@ export interface PageInterface {
 })
 export class SidemenuPage {
 
+  private loader: any;
   rootPage = 'TabsPage';
 
   @ViewChild(Nav) nav: Nav;
@@ -27,9 +31,21 @@ export class SidemenuPage {
   ];
 
   constructor(
+    private app: App,
     public navCtrl: NavController, 
-    public navParams: NavParams
+    public navParams: NavParams,
+    private loadingCtrl: LoadingController,
+    private authService: AuthService,
+    private alertService: AlertService
     ) {
+  }
+
+  presentLoading(msg) {
+    this.loader = this.loadingCtrl.create({
+      content: msg
+    });
+ 
+    this.loader.present();
   }
 
   openPage(page: PageInterface) {
@@ -68,8 +84,27 @@ export class SidemenuPage {
     this.navCtrl.setRoot("IntroPage");
   } */
 
+  showFaqs() {
+    this.app.getRootNav().push("FaqsPage");
+  }
+
+  showContactus(){
+    this.app.getRootNav().push("ContactusPage");
+  }
+
   logOut() {
-    this.navCtrl.setRoot("LoginPage");
+    this.presentLoading('Signing Out...');
+
+    this.authService.signOut().then(
+      () => {
+        this.loader.dismiss();
+        this.navCtrl.setRoot("LoginPage");
+      },
+      error => {
+        this.loader.dismiss();
+        this.alertService.error('An error occured please try again.');
+      }
+    );
   }
 
 }

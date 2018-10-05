@@ -1,6 +1,6 @@
 import { AlertService } from './../../_services/alert.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../_services/auth.service';
 
@@ -10,12 +10,15 @@ import { AuthService } from '../../_services/auth.service';
   templateUrl: 'login.html',
 })
 export class LoginPage {
+
+  private loader: any;
   authForm: FormGroup;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public formBuilder: FormBuilder,
+    private loadingCtrl: LoadingController,
     private auth: AuthService,
     private alertService: AlertService
     ) {
@@ -25,18 +28,32 @@ export class LoginPage {
     });
   }
 
+  presentLoading(msg) {
+    this.loader = this.loadingCtrl.create({
+      content: msg
+    });
+ 
+    this.loader.present();
+  }
+
   submitForm(value: any) {
     if(this.authForm.valid) {
+      this.presentLoading('Signing In...');
       let credentials = {
         email: value.email,
         password: value.password
       };
       this.auth.signInWithEmail(credentials)
         .then(
-          () => this.navCtrl.setRoot("SidemenuPage"),
-          error => this.alertService.error(error)
-        )
-        .catch();
+          () => {
+            this.navCtrl.setRoot("SidemenuPage");
+            this.loader.dismiss();
+          },
+          error => {
+            this.alertService.error(error);
+            this.loader.dismiss();
+          }
+        );
     }
   }
 
