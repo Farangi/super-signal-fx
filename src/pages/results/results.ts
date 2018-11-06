@@ -5,6 +5,7 @@ import { SignalService } from './../../_services';
 import { SymbolService } from './../../_services';
 
 import * as moment from 'moment';
+import { PaymentProvider } from '../../providers/payment/payment';
 
 @IonicPage()
 @Component({
@@ -28,11 +29,12 @@ export class ResultsPage implements OnInit {
 
   constructor(
     private app: App,
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     private loadingCtrl: LoadingController,
     private signalService:SignalService,
-    private symbolService:SymbolService
+    private symbolService:SymbolService,
+    private paymentService: PaymentProvider
     ) {
   }
 
@@ -44,7 +46,7 @@ export class ResultsPage implements OnInit {
     this.loader = this.loadingCtrl.create({
       content: msg
     });
- 
+
     this.loader.present();
   }
 
@@ -83,7 +85,16 @@ export class ResultsPage implements OnInit {
       if(refresher){
         refresher.complete();
       }
-      this.results = signals;
+
+      this.paymentService.checkMembership().subscribe((pro:any) => {
+        if(pro && pro.status == 'active'){
+          console.log('Active hai janab');
+          this.results = signals;
+        } else {
+          console.log('Ni hai janab');
+          this.results = signals.filter(signal => !signal.premium);
+        }
+      });
 
       this.getSymbols(refresher);
     });

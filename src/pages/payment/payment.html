@@ -1,0 +1,34 @@
+<!--
+  Generated template for the PaymentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>payment</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <button *ngIf="this.initSubs" margin-bottom ion-button block color="primary" (click)="openHandler()">
+      Subscribe for €29.99/month
+    </button>
+
+    <div *ngIf="paymentService.membership | async as pro">
+      Membership
+      <button margin-bottom ion-button block color="primary" *ngIf="pro.status != 'active'" (click)="openHandler()">
+        Subscribe for €29.99/month
+      </button>
+
+      <button *ngIf="pro.status == 'active'">
+        <h3>Subscription is Active</h3>
+      </button>
+
+    </div>
+
+</ion-content>

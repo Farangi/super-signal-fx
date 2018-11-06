@@ -1,3 +1,4 @@
+import { AngularFireDatabase } from 'angularfire2/database';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -26,6 +27,7 @@ import { SymbolService } from '../_services';
 import { FaqsService } from '../_services';
 import { DisclaimerService } from '../_services';
 import { ContactService } from '../_services';
+import { PaymentProvider } from '../providers/payment/payment';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { ContactService } from '../_services';
     Clipboard,
     FCM,
     AngularFireAuth,
+    AngularFireDatabase,
     AlertService,
     FcmService,
     AuthService,
@@ -57,7 +60,8 @@ import { ContactService } from '../_services';
     FaqsService,
     DisclaimerService,
     ContactService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    PaymentProvider
   ]
 })
 export class AppModule {}

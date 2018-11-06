@@ -8,7 +8,7 @@
     </ion-buttons>
     <ion-title color="light" ion-text>Results</ion-title>
   </ion-navbar>
-  
+
   <ion-toolbar no-border-top>
     <ion-segment [(ngModel)]="type">
       <ion-segment-button value="all">
@@ -19,7 +19,7 @@
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
-  
+
 </ion-header>
 
 <ion-content>
@@ -53,8 +53,9 @@
           <p class="sub time"><ion-icon name="time"></ion-icon>{{result.date | date: 'yyyy-MM-dd'}} | {{result.direction}}</p>
         </ion-col>
         <ion-col col-4 text-right>
+          <div *ngIf="result.premium">Premium</div>
           <p *ngIf="result.status !== 'active' && result.status !== 'pending'">{{result.pips}}</p>
-          <p class="sub" [class.active]="result.status === 'active'" 
+          <p class="sub" [class.active]="result.status === 'active'"
                          [class.pending]="result.status === 'pending'"
                          [class.cancelled]="result.status === 'cancelled'"
                          [class.closed]="result.status === 'closed'">
@@ -68,8 +69,8 @@
       <div class="controls">
         <ion-item color="dark">
           <ion-label>Select Symbol</ion-label>
-          <select-searchable item-content title="Symbol" [(ngModel)]="symbolFilter" 
-            itemValueField="value" itemTextField="name" [items]="symbols" [isOkButtonEnabled]="true" [canSearch]="true" 
+          <select-searchable item-content title="Symbol" [(ngModel)]="symbolFilter"
+            itemValueField="value" itemTextField="name" [items]="symbols" [isOkButtonEnabled]="true" [canSearch]="true"
             [focusSearchbar]="true" [noItemsFoundText]="'No symbols found. kindly try again.'">
           </select-searchable>
         </ion-item>
@@ -79,7 +80,7 @@
             <ion-label>From</ion-label>
             <ion-datetime displayFormat="DD/MM/YYYY" max="{{currentDate}}" [(ngModel)]="dateFilter.from"></ion-datetime>
           </ion-item>
-  
+
           <ion-item color="dark" class="date-item">
             <ion-label>To</ion-label>
             <ion-datetime displayFormat="DD/MM/YYYY" min="{{dateFilter.from}}" max="{{currentDate}}" [(ngModel)]="dateFilter.to"></ion-datetime>
@@ -98,7 +99,7 @@
         </ion-col>
       </ion-row>
 
-      <ion-row *ngFor="let result of results | pairfilter:symbolFilter | daterange :dateFilter.from :dateFilter.to;trackBy trackResult" 
+      <ion-row *ngFor="let result of results | pairfilter:symbolFilter | daterange :dateFilter.from :dateFilter.to;trackBy trackResult"
       class="result-item" align-items-center (click)="showSignalDetails(result)">
         <span *ngIf="results.length == 0">No Signals avaiable for this pair try another.</span>
         <ion-col col-8 text-left>
@@ -107,15 +108,16 @@
         </ion-col>
 
         <ion-col col-4 text-right>
+          <div *ngIf="result.premium">Premium</div>
           <p *ngIf="result.status !== 'active' && result.status !== 'pending'">{{result.pips}}</p>
-          <p class="sub" [class.active]="result.status === 'active'" 
+          <p class="sub" [class.active]="result.status === 'active'"
                           [class.pending]="result.status === 'pending'"
                           [class.cancelled]="result.status === 'cancelled'"
                           [class.closed]="result.status === 'closed'">
               {{result.status | uppercase}}
           </p>
         </ion-col>
-      </ion-row> 
+      </ion-row>
     </div>
 
   </div>

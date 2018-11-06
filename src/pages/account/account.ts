@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, App } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AlertService } from "../../_services";
@@ -21,7 +21,8 @@ export class AccountPage implements OnInit {
   settings: any = {pushNotifications:true, emailNotifications: true};
 
   constructor(
-    public navCtrl: NavController, 
+    private app: App,
+    public navCtrl: NavController,
     public navParams: NavParams,
     public formBuilder: FormBuilder,
     private loadingCtrl: LoadingController,
@@ -32,12 +33,12 @@ export class AccountPage implements OnInit {
     ) {
       this.userName = this.authService.getDisplayName();
 
-      this.emailForm = formBuilder.group({       
+      this.emailForm = formBuilder.group({
         email: [this.authService.getEmail(), Validators.compose([Validators.required, Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)])],
         password: ['', Validators.compose([Validators.required])]
       });
 
-      this.nameForm = formBuilder.group({       
+      this.nameForm = formBuilder.group({
         name: [this.userName, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
       });
   }
@@ -46,11 +47,15 @@ export class AccountPage implements OnInit {
     this.getSettings();
   }
 
+  openPayment() {
+    this.app.getRootNav().push("PaymentPage");
+  }
+
   presentLoading(msg) {
     this.loader = this.loadingCtrl.create({
       content: msg
     });
- 
+
     this.loader.present();
   }
 
@@ -79,7 +84,7 @@ export class AccountPage implements OnInit {
           text: 'No',
           role: 'cancel',
           handler: () => {
-            
+
           }
         },
         {
@@ -121,19 +126,19 @@ export class AccountPage implements OnInit {
             text: 'No',
             role: 'cancel',
             handler: () => {
-              
+
             }
           },
           {
             text: 'Yes',
             handler: () => {
               this.presentLoading('Updating...');
-  
+
               let data = {
                 newEmail: value.email,
                 password: value.password
               }
-        
+
               this.authService.updateEmail(data).then(
                 () => {
                   this.alertService.success('Email updated successfully.');
@@ -159,7 +164,7 @@ export class AccountPage implements OnInit {
       this.alertService.error('Email or Password is not valid.')
     }
   }
-  
+
   updatePassword(){
     let alert = this.alertCtrl.create({
       title: 'Confirm!',

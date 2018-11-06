@@ -8,7 +8,7 @@
       </ion-buttons>
       <ion-title color="light" ion-text>Account</ion-title>
     </ion-navbar>
-  
+
   </ion-header>
 
 <ion-content padding>
@@ -29,7 +29,7 @@
       </ion-card-header>
       <ion-card-content>
         <form [formGroup]="nameForm" (ngSubmit)="updateName(nameForm.value)">
-  
+
           <ion-list margin-bottom>
             <ion-row>
               <ion-col text-right>
@@ -43,13 +43,13 @@
               </ion-col>
             </ion-row>
           </ion-list>
-  
+
           <ion-row>
             <ion-col text-center>
                 <button ion-button color="secondary" type="submit">Update</button>
             </ion-col>
           </ion-row>
-  
+
         </form>
       </ion-card-content>
     </ion-card>
@@ -110,7 +110,7 @@
           <ion-toggle color="secondary" [(ngModel)]="settings.emailNotifications"></ion-toggle>
         </ion-item>
       </ion-list>
-        
+
       <ion-row>
         <ion-col text-center>
             <button ion-button color="secondary" type="button" (click)="updateSettings()">Update</button>
@@ -122,7 +122,7 @@
 
   <ion-row margin-top>
     <ion-col text-center>
-      <button padding ion-button color="primary">My subscription</button>
+      <button padding ion-button color="primary" (click)="openPayment()">My subscription</button>
     </ion-col>
   </ion-row>
 
